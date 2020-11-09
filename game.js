@@ -18,6 +18,7 @@
     highscoresScene = null,
     body = [],
     food = null,
+    foodExtraPoint = null,
     //var wall = [],
     highscores = [],
     posHighscore = 10,
@@ -25,6 +26,7 @@
     score = 0,
     iBody = new Image(),
     iFood = new Image(),
+    iFoodExtra = new Image(),
     aEat = new Audio(),
     aDie = new Audio();
     window.requestAnimationFrame = (function () {
@@ -124,10 +126,13 @@
     // Load assets
     iBody.src = 'assets/body.png';
     iFood.src = 'assets/fruit.png';
+    iFoodExtra.src = 'assets/extra-fruit.png';
     aEat.src = 'assets/chomp.m4a';
     aDie.src = 'assets/dies.m4a';
     // Create food
     food = new Rectangle(80, 80, 10, 10);
+    // Create extra point food
+    foodExtraPoint = new Rectangle(90, 70, 20, 20);
     // Create walls
     //wall.push(new Rectangle(50, 50, 10, 10));
     //wall.push(new Rectangle(50, 100, 10, 10));//wall.push(new Rectangle(100, 50, 10, 10));
@@ -170,6 +175,8 @@ if (localStorage.highscores) {
     body.push(new Rectangle(0, 0, 10, 10));
     food.x = random(canvas.width / 10 - 1) * 10;
     food.y = random(canvas.height / 10 - 1) * 10;
+    foodExtraPoint.x = random(canvas.width / 10 - 1) * 10;
+    foodExtraPoint.y = random(canvas.height / 10 - 1) * 10;
     gameover = false;
     };
     gameScene.paint = function (ctx) {
@@ -190,6 +197,7 @@ if (localStorage.highscores) {
     //}
     // Draw foodctx.strokeStyle = '#f00';
 food.drawImage(ctx, iFood);
+foodExtraPoint.drawImage(ctx, iFoodExtra);
 // Draw score
 ctx.fillStyle = '#fff';
 ctx.textAlign = 'left';
@@ -264,6 +272,13 @@ score += 1;
 food.x = random(canvas.width / 10 - 1) * 10;
 food.y = random(canvas.height / 10 - 1) * 10;
 aEat.play();
+}
+
+// Extra point Food Intersects
+if (body[0].intersects(foodExtraPoint)) {
+score += 5;
+foodExtraPoint.x = random(canvas.width / 10 - 1) * 10;
+foodExtraPoint.y = random(canvas.height / 10 - 1) * 10;
 }
 // Wall Intersects
 //for (i = 0, l = wall.length; i < l; i += 1) {

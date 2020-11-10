@@ -24,6 +24,7 @@
     posHighscore = 10,
     dir = 0,
     score = 0,
+    userId = 1,
     iBody = new Image(),
     iFood = new Image(),
     iFoodExtra = new Image(),
@@ -266,7 +267,7 @@ if (body[0].y < 0) {
 body[0].y = canvas.height - body[0].height;
 }
 // POST to API
-function postApiScore(actualScore, userId){
+function postApiScore(actualScore){
     fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts/`, {
     method: 'POST',
     body: JSON.stringify({

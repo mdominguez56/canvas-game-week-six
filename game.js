@@ -19,7 +19,7 @@
     body = [],
     food = null,
     foodExtraPoint = null,
-    //var wall = [],
+    foodExtraPointTime = 0,
     highscores = [],
     posHighscore = 10,
     dir = 0,
@@ -133,11 +133,6 @@
     food = new Rectangle(80, 80, 10, 10);
     // Create extra point food
     foodExtraPoint = new Rectangle(80, 80, 10, 10);
-    // Create walls
-    //wall.push(new Rectangle(50, 50, 10, 10));
-    //wall.push(new Rectangle(50, 100, 10, 10));//wall.push(new Rectangle(100, 50, 10, 10));
-//wall.push(new Rectangle(100, 100, 10, 10));
-// Load saved highscores
 if (localStorage.highscores) {
     highscores = localStorage.highscores.split(',');
     }
@@ -166,6 +161,7 @@ if (localStorage.highscores) {
     };
     // Game Scene
     gameScene = new Scene();
+
     gameScene.load = function () {
     score = 0;
     dir = 1;
@@ -175,6 +171,7 @@ if (localStorage.highscores) {
     body.push(new Rectangle(0, 0, 10, 10));
     food.x = random(canvas.width / 10 - 1) * 10;
     food.y = random(canvas.height / 10 - 1) * 10;
+    foodExtraPointTime = Date.now() + 1000*(5 + random(15));
     foodExtraPoint.x = random(canvas.width / 10 - 1) * 10;
     foodExtraPoint.y = random(canvas.height / 10 - 1) * 10;
     gameover = false;
@@ -197,7 +194,10 @@ if (localStorage.highscores) {
     //}
     // Draw foodctx.strokeStyle = '#f00';
 food.drawImage(ctx, iFood);
-foodExtraPoint.drawImage(ctx, iFoodExtra);
+if((Date.now() > foodExtraPointTime)){
+    foodExtraPoint.drawImage(ctx, iFoodExtra);
+}
+
 // Draw score
 ctx.fillStyle = '#fff';
 ctx.textAlign = 'left';
@@ -275,10 +275,11 @@ aEat.play();
 }
 
 // Extra point Food Intersects
-if (body[0].intersects(foodExtraPoint)) {
+if (body[0].intersects(foodExtraPoint,foodExtraPointTime)) {
 score += 5;
 foodExtraPoint.x = random(canvas.width / 10 - 1) * 10;
 foodExtraPoint.y = random(canvas.height / 10 - 1) * 10;
+foodExtraPointTime =  Date.now() + 1000*(5 + random(15))
 }
 // Wall Intersects
 //for (i = 0, l = wall.length; i < l; i += 1) {

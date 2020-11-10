@@ -150,8 +150,8 @@ if (localStorage.highscores) {
     // Draw title
     ctx.fillStyle = '#fff';
     ctx.textAlign = 'center';
-    ctx.fillText('SNAKE', 150, 60);
-    ctx.fillText('Press Enter', 150, 90);
+    ctx.fillText('SNAKE', 300, 120);
+    ctx.fillText('Press Enter', 300, 180);
     };
     mainScene.act = function () {
     // Load next scene
@@ -209,9 +209,9 @@ ctx.fillText('Score: ' + score, 0, 10);
 if (pause) {
 ctx.textAlign = 'center';
 if (gameover) {
-ctx.fillText('GAME OVER', 150, 75);
+ctx.fillText('GAME OVER', 300, 150);
 } else {
-ctx.fillText('PAUSE', 150, 75);
+ctx.fillText('PAUSE', 300, 150);
 }
 }
 };
@@ -330,7 +330,7 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 // Draw title
 ctx.fillStyle = '#fff';
 ctx.textAlign = 'center';
-ctx.fillText('HIGH SCORES', 150, 30);
+ctx.fillText('HIGH SCORES', 220, 30);
 // Draw high scores
 ctx.textAlign = 'right';
 for (i = 0, l = highscores.length; i < l; i += 1) {

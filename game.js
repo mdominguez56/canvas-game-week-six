@@ -132,7 +132,7 @@
     // Create food
     food = new Rectangle(80, 80, 10, 10);
     // Create extra point food
-    foodExtraPoint = new Rectangle(90, 70, 20, 20);
+    foodExtraPoint = new Rectangle(80, 80, 10, 10);
     // Create walls
     //wall.push(new Rectangle(50, 50, 10, 10));
     //wall.push(new Rectangle(50, 100, 10, 10));//wall.push(new Rectangle(100, 50, 10, 10));

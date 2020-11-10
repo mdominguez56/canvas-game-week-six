@@ -128,8 +128,8 @@
     iBody.src = 'assets/body.png';
     iFood.src = 'assets/fruit.png';
     iFoodExtra.src = 'assets/extra-fruit.png';
-    aEat.src = 'assets/chomp.m4a';
-    aDie.src = 'assets/dies.m4a';
+    aEat.src = 'assets/chomp.oga';
+    aDie.src = 'assets/dies.oga';
     // Create food
     food = new Rectangle(80, 80, 10, 10);
     // Create extra point food
@@ -172,7 +172,7 @@ if (localStorage.highscores) {
     body.push(new Rectangle(0, 0, 10, 10));
     food.x = random(canvas.width / 10 - 1) * 10;
     food.y = random(canvas.height / 10 - 1) * 10;
-    foodExtraPointTime = Date.now() + 1000*(5 + random(15));
+    foodExtraPointTime = Date.now() + 700*(5 + random(17));
     foodExtraPoint.x = random(canvas.width / 10 - 1) * 10;
     foodExtraPoint.y = random(canvas.height / 10 - 1) * 10;
     gameover = false;
@@ -298,7 +298,8 @@ score += 5;
 postApiScore(score)
 foodExtraPoint.x = random(canvas.width / 10 - 1) * 10;
 foodExtraPoint.y = random(canvas.height / 10 - 1) * 10;
-foodExtraPointTime =  Date.now() + 1000*(5 + random(15))
+foodExtraPointTime =  Date.now() + 700*(5 + random(17))
+aEat.play()
 }
 
 

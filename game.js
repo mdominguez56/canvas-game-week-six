@@ -265,10 +265,27 @@ body[0].x = canvas.width - body[0].width;
 if (body[0].y < 0) {
 body[0].y = canvas.height - body[0].height;
 }
+// POST to API
+function postApiScore(actualScore, userId){
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts/`, {
+    method: 'POST',
+    body: JSON.stringify({
+        score: actualScore,
+        userId: userId,
+    }),
+    headers: {
+        'Content-type': 'application/json',
+    },
+    })
+    .then((response) => response.json())
+    .then((json) => {console.log(json); console.log("Score sent successfully");})
+    .catch((error) => {console.log(error);console.log("Error trying to send the score");})
+}
 // Food Intersects
 if (body[0].intersects(food)) {
 body.push(new Rectangle(0, 0, 10, 10));
 score += 1;
+postApiScore(score)
 food.x = random(canvas.width / 10 - 1) * 10;
 food.y = random(canvas.height / 10 - 1) * 10;
 aEat.play();
@@ -277,22 +294,13 @@ aEat.play();
 // Extra point Food Intersects
 if (body[0].intersects(foodExtraPoint,foodExtraPointTime)) {
 score += 5;
+postApiScore(score)
 foodExtraPoint.x = random(canvas.width / 10 - 1) * 10;
 foodExtraPoint.y = random(canvas.height / 10 - 1) * 10;
 foodExtraPointTime =  Date.now() + 1000*(5 + random(15))
 }
-// Wall Intersects
-//for (i = 0, l = wall.length; i < l; i += 1) {
-// if (food.intersects(wall[i])) {
-// food.x = random(canvas.width / 10 - 1) * 10;
-// food.y = random(canvas.height / 10 - 1) * 10;
-// }
-//
-// if (body[0].intersects(wall[i])) {
-// gameover = true;
-// pause = true;
-// }
-//}
+
+
 // Body Intersects
 for (i = 2, l = body.length; i < l; i += 1) {
 if (body[0].intersects(body[i])) {
